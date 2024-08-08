@@ -10,11 +10,12 @@
 //  - ls
 // - generations
 
+require("dotenv").config();
+
 const db = require("./src/lib/db");
-const koderUseCases = require("./src/usecases/koders.usecase");
-const mentorUseCases = require("./src/usecases/mentors.usecase");
 
 const kodersActions = require("./src/commands/koders.commands");
+const mentorsActions = require("./src/commands/mentors.commands");
 
 const getArgValue = require("./src/lib/getArgValue");
 
@@ -23,7 +24,7 @@ const action = process.argv[3]; // add, rm, ls
 
 const allowedActions = {
   koders: kodersActions,
-  mentors: {},
+  mentors: mentorsActions,
   generations: {},
 };
 

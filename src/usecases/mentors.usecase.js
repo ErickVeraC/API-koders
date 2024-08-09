@@ -2,6 +2,14 @@ const Mentor = require("../models/mentor.model");
 const createError = require("http-errors");
 
 async function create(data) {
+  // find -> regresa un arreglo
+  // findOne -> regresa un objeto o null
+  const existingMentor = await Mentor.findOne({ email: data.email });
+
+  if (existingMentor) {
+    throw createError(409, "Mentor already exists");
+  }
+
   const newMentor = await Mentor.create(data);
   return newMentor;
 }
@@ -22,7 +30,10 @@ async function updateById(id, newData) {
   if (!mentorFound) {
     throw createError(404, "Mentor not found");
   }
-  const mentor = await Mentor.findByIdAndUpdate(id, newData, { new: true }); // new: true para que nos devuelva el documento actualizado
+  const mentorUpdated = await Mentor.findByIdAndUpdate(id, newData, {
+    new: true,
+  }); // new: true para que nos devuelva el documento actualizado
+  return mentorUpdated;
 }
 
 async function deleteById(id) {

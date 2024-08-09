@@ -18,6 +18,10 @@ const koderSchema = new mongoose.Schema({
     required: true,
     match: RegExp(".*@.*..*"),
   },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 // para el modelo necesitamos el nombre de la colección y el esquema

@@ -18,6 +18,16 @@ const mentorSchema = new mongoose.Schema({
     required: true,
     match: RegExp(".*@.*..*"),
   },
+  age: {
+    type: Number,
+    required: true,
+    min: 15,
+    max: 100,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 module.exports = mongoose.model("Mentor", mentorSchema);
